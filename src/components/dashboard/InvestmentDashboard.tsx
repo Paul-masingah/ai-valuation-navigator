@@ -43,7 +43,8 @@ import {
   Tooltip as RechartsTooltip,
   ResponsiveContainer,
   Legend,
-  Cell
+  Cell,
+  Line
 } from 'recharts';
 
 const recentProperties = [

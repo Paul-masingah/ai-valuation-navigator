@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { 
   ArrowLeft, 
@@ -36,7 +35,8 @@ import {
   CartesianGrid, 
   Tooltip as RechartsTooltip, 
   ResponsiveContainer,
-  Legend
+  Legend,
+  Cell
 } from 'recharts';
 import { toast } from "sonner";
 

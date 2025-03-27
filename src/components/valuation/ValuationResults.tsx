@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { 
   AlertCircle,
@@ -10,7 +9,7 @@ import {
   Download, 
   Home, 
   Info, 
-  LineChart, 
+  LineChart as RechartsLineChart, 
   Map as MapIcon, 
   Ruler, 
   Share2, 
@@ -427,7 +426,7 @@ const ValuationResults = ({ setShowResults }: ValuationResultsProps) => {
             </h3>
             <div className="h-80">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={historicalData}>
+                <RechartsLineChart data={historicalData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
                   <XAxis dataKey="month" tick={{ fontSize: 12 }} />
                   <YAxis 
@@ -444,7 +443,7 @@ const ValuationResults = ({ setShowResults }: ValuationResultsProps) => {
                       <stop offset="95%" stopColor="#2C7A7B" stopOpacity={1}/>
                     </linearGradient>
                   </defs>
-                  <Area 
+                  <Line 
                     type="monotone" 
                     dataKey="value" 
                     stroke="url(#colorLine)" 
@@ -457,7 +456,7 @@ const ValuationResults = ({ setShowResults }: ValuationResultsProps) => {
                       <stop offset="95%" stopColor="#2C7A7B" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                </LineChart>
+                </RechartsLineChart>
               </ResponsiveContainer>
             </div>
           </div>
