@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { 
   AlertCircle,
@@ -42,7 +43,8 @@ import {
   ResponsiveContainer,
   PieChart,
   Pie,
-  Cell
+  Cell,
+  Line
 } from 'recharts';
 import { toast } from "sonner";
 
@@ -352,7 +354,7 @@ const ValuationResults = ({ setShowResults }: ValuationResultsProps) => {
                       tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
                     />
                     <RechartsTooltip 
-                      formatter={(value: number) => [`$${value.toLocaleString()}`, 'Projected Value']}
+                      formatter={(value: number) => [`${value.toLocaleString()}`, 'Projected Value']}
                       labelFormatter={(label) => `Year: ${label}`}
                     />
                     <Area 
@@ -384,7 +386,7 @@ const ValuationResults = ({ setShowResults }: ValuationResultsProps) => {
                     <h4 className="font-medium text-realestate-navy">Market Trend Analysis</h4>
                   </div>
                   <p className="text-gray-600 text-sm">
-                    The property is located in a rapidly appreciating neighborhood with a projected annual growth rate of 5.2%, higher than the city average of 3.8%.
+                    This property is located in a rapidly appreciating neighborhood with a projected annual growth rate of 5.2%, higher than the city average of 3.8%.
                   </p>
                 </div>
                 
@@ -426,7 +428,7 @@ const ValuationResults = ({ setShowResults }: ValuationResultsProps) => {
             </h3>
             <div className="h-80">
               <ResponsiveContainer width="100%" height="100%">
-                <RechartsLineChart data={historicalData}>
+                <AreaChart data={historicalData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
                   <XAxis dataKey="month" tick={{ fontSize: 12 }} />
                   <YAxis 
@@ -435,7 +437,7 @@ const ValuationResults = ({ setShowResults }: ValuationResultsProps) => {
                     tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
                   />
                   <RechartsTooltip 
-                    formatter={(value: number) => [`$${value.toLocaleString()}`, 'Property Value']}
+                    formatter={(value: number) => [`${value.toLocaleString()}`, 'Property Value']}
                   />
                   <defs>
                     <linearGradient id="colorLine" x1="0" y1="0" x2="1" y2="0">
@@ -447,16 +449,9 @@ const ValuationResults = ({ setShowResults }: ValuationResultsProps) => {
                     type="monotone" 
                     dataKey="value" 
                     stroke="url(#colorLine)" 
-                    fill="url(#colorGradient)" 
                     strokeWidth={3}
                   />
-                  <defs>
-                    <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#2C7A7B" stopOpacity={0.2}/>
-                      <stop offset="95%" stopColor="#2C7A7B" stopOpacity={0}/>
-                    </linearGradient>
-                  </defs>
-                </RechartsLineChart>
+                </AreaChart>
               </ResponsiveContainer>
             </div>
           </div>
@@ -595,22 +590,16 @@ const ValuationResults = ({ setShowResults }: ValuationResultsProps) => {
                 </div>
                 
                 <div className="mt-3 pt-3 border-t border-gray-100 flex justify-between items-center">
-                  <span className="text-sm text-gray-500">
-                    Price per sq ft: <span className="font-medium">${Math.round(property.price / property.sqft)}</span>
-                  </span>
-                  
+                  <span className="text-sm text-gray-500">Price per sq ft: <span className="font-medium text-realestate-navy">${Math.round(property.price / property.sqft)}</span></span>
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <div className="flex items-center gap-1 text-sm text-realestate-teal cursor-help">
+                        <Button variant="ghost" size="sm" className="h-7 px-2 text-realestate-teal">
                           <Info className="h-4 w-4" />
-                          <span>Similarity score: 92%</span>
-                        </div>
+                        </Button>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p className="text-xs max-w-xs">
-                          This property has similar characteristics to yours. The AI model considers factors like location, size, age, condition, and features when determining similarity.
-                        </p>
+                        <p className="text-sm">Similar to your property but {property.price > propertyDetails.estimatedValue ? 'sold for more due to recent renovations' : 'sold for less due to lower quality finishes'}</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>

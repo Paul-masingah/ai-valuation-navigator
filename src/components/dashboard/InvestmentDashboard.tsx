@@ -463,7 +463,7 @@ const InvestmentDashboard = () => {
           <CardContent>
             <div className="h-80">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={marketTrendsData}>
+                <RechartsBarChart data={marketTrendsData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
                   <XAxis dataKey="month" tick={{ fontSize: 12 }} />
                   <YAxis 
@@ -498,7 +498,7 @@ const InvestmentDashboard = () => {
                     dot={{ r: 4 }}
                     activeDot={{ r: 6 }}
                   />
-                </LineChart>
+                </RechartsBarChart>
               </ResponsiveContainer>
             </div>
             
