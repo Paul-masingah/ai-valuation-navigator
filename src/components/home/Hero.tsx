@@ -1,13 +1,15 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BarChart3, Building2, TrendingUp } from "lucide-react";
+import { ArrowRight, BarChart3, Building2, Play, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useEffect, useState } from "react";
+import VideoModal from "./VideoModal";
 
 const Hero = () => {
   const isMobile = useIsMobile();
   const [scrolled, setScrolled] = useState(false);
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +19,10 @@ const Hero = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const openVideoModal = () => {
+    setVideoModalOpen(true);
+  };
 
   return (
     <div className="relative overflow-hidden bg-gray-50 py-16 sm:py-24">
@@ -36,10 +42,16 @@ const Hero = () => {
                 Get Started <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-realestate-teal text-realestate-navy hover:bg-realestate-teal hover:text-white">
-              <Link to="/demo">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-realestate-teal text-realestate-navy hover:bg-realestate-teal hover:text-white"
+              onClick={openVideoModal}
+            >
+              <div className="flex items-center">
+                <Play className="mr-2 h-4 w-4" />
                 Watch Demo
-              </Link>
+              </div>
             </Button>
           </div>
           
@@ -101,6 +113,11 @@ const Hero = () => {
           )}
         </div>
       </div>
+      
+      <VideoModal 
+        isOpen={videoModalOpen} 
+        onClose={() => setVideoModalOpen(false)} 
+      />
     </div>
   );
 };
