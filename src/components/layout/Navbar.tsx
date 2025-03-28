@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Building, ChevronDown, Menu, X } from "lucide-react";
+import { Building, ChevronDown, LogIn, Menu, UserPlus, X } from "lucide-react";
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
@@ -50,10 +50,16 @@ const Navbar = () => {
           </div>
           <div className="flex space-x-3">
             <Button variant="outline" className="border-realestate-teal text-realestate-navy hover:bg-realestate-teal hover:text-white">
-              Log in
+              <Link to="/login" className="flex items-center">
+                <LogIn className="mr-2 h-4 w-4" />
+                Log in
+              </Link>
             </Button>
             <Button className="bg-realestate-teal hover:bg-realestate-navy">
-              Sign up
+              <Link to="/signup" className="flex items-center">
+                <UserPlus className="mr-2 h-4 w-4" />
+                Sign up
+              </Link>
             </Button>
           </div>
         </div>
@@ -99,10 +105,16 @@ const Navbar = () => {
             </div>
             <div className="pt-2 flex flex-col space-y-2">
               <Button variant="outline" className="w-full border-realestate-teal text-realestate-navy hover:bg-realestate-teal hover:text-white">
-                Log in
+                <Link to="/login" className="flex items-center justify-center w-full">
+                  <LogIn className="mr-2 h-4 w-4" />
+                  Log in
+                </Link>
               </Button>
               <Button className="w-full bg-realestate-teal hover:bg-realestate-navy">
-                Sign up
+                <Link to="/signup" className="flex items-center justify-center w-full">
+                  <UserPlus className="mr-2 h-4 w-4" />
+                  Sign up
+                </Link>
               </Button>
             </div>
           </div>
