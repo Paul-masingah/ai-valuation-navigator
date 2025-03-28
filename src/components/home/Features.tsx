@@ -1,5 +1,6 @@
 
 import { Activity, BarChart2, Building, CircleDollarSign, Clock, Compass, Database, Fingerprint, LineChart, Scale, Search, Shield } from "lucide-react";
+import { useState } from "react";
 
 const features = [
   {
@@ -50,6 +51,8 @@ const features = [
 ];
 
 const Features = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
@@ -62,14 +65,22 @@ const Features = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {features.map((feature, index) => (
             <div 
               key={index} 
-              className="bg-gray-50 rounded-xl p-6 border border-gray-100 card-hover"
+              className={`bg-gray-50 rounded-xl p-6 border border-gray-100 transition-all duration-300 ${
+                hoveredIndex === index 
+                  ? 'bg-white shadow-lg scale-[1.02] border-realestate-teal/20' 
+                  : 'card-hover'
+              }`}
               style={{ animationDelay: `${index * 0.1}s` }}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              <div className="bg-white rounded-full h-16 w-16 flex items-center justify-center shadow-sm mb-4">
+              <div className={`bg-white rounded-full h-16 w-16 flex items-center justify-center shadow-sm mb-4 transition-all duration-300 ${
+                hoveredIndex === index ? 'bg-realestate-teal/10' : ''
+              }`}>
                 {feature.icon}
               </div>
               <h3 className="text-xl font-semibold mb-3 text-realestate-navy">{feature.title}</h3>
